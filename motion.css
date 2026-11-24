@@ -1,0 +1,64 @@
+/* 活动与相册 · 轻柔动效（样板 2026-11-22）
+   只在脚本加上 .js-motion 后才隐藏再淡入；脚本没跑时页面照常全部显示。
+   系统开了“减少动态效果”时，全部动效关闭。 */
+
+/* 1. 往下滑时，活动卡片一张张淡入 */
+.js-motion .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.js-motion .reveal.is-in{opacity:1;transform:none}
+
+/* 2. 顶部三张活动入口：指到或按住时轻轻抬起 */
+.event-shelf .sample-grid a{transition:transform .25s ease,background-color .25s ease}
+.event-shelf .sample-grid a:hover,.event-shelf .sample-grid a:focus-visible{transform:translateY(-3px);background:#2d4659}
+
+/* 3. 活动相册：缩略图格子 */
+.album{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0;padding:0;list-style:none}
+.album li{margin:0}
+.album button{display:block;width:100%;padding:0;margin:0;border:1px solid var(--line);background:var(--paper-2);color:inherit;font:inherit;text-align:left;cursor:pointer;position:relative;overflow:hidden}
+.album .pic{display:block;overflow:hidden}
+.album img{width:100%;aspect-ratio:3/2;object-fit:cover;transition:transform .6s ease}
+.album button:hover img,.album button:focus-visible img{transform:scale(1.04)}
+.album .cap{display:block;padding:9px 12px 11px;font-size:16px;line-height:1.5}
+.album .cap strong{display:block;font-family:var(--serif)}
+.album .cap small{display:block;color:var(--ink-2);font-size:14px}
+.album .tag{position:absolute;top:8px;left:8px;background:rgba(20,32,46,.82);color:#ffe3aa;font-size:13px;line-height:1.4;padding:3px 9px}
+.album-note{color:var(--ink-2);font-size:16px}
+@media(max-width:680px){.album{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.album .cap{padding:7px 9px 9px;font-size:15px}.album .cap small{font-size:13px}}
+
+/* 4. 点开放大看：全屏看图，可左右翻 */
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(14,20,28,.95);display:flex;align-items:center;justify-content:center;padding:64px 12px 24px;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+.lightbox.open{opacity:1;visibility:visible;transition:opacity .3s ease}
+.lightbox figure{margin:0;max-width:min(100%,1100px);color:#fff3de;text-align:center}
+.lightbox img{max-width:100%;max-height:68vh;width:auto;height:auto;margin:0 auto;transition:opacity .25s ease,transform .25s ease}
+.lightbox img.swap{opacity:0;transform:scale(.98)}
+.lightbox figcaption{margin-top:14px;font-size:17px;line-height:1.6}
+.lightbox figcaption strong{display:block;font:700 22px/1.4 var(--serif);color:#fff}
+.lightbox figcaption small{display:block;color:#ffe3aa;font-size:15px;margin-top:4px}
+.lb-count{position:absolute;top:18px;left:18px;color:#fff3de;font-size:16px}
+.lb-btn{position:absolute;width:52px;height:52px;border:0;border-radius:50%;background:rgba(255,243,222,.16);color:#fff;font:26px/52px var(--sans);text-align:center;padding:0;cursor:pointer}
+.lb-btn:hover,.lb-btn:focus-visible{background:rgba(255,243,222,.32)}
+.lb-btn:focus-visible{outline:3px solid #ffe3aa;outline-offset:3px}
+.lb-close{top:8px;right:10px}
+.lb-prev{left:10px;top:calc(50% - 26px)}
+.lb-next{right:10px;top:calc(50% - 26px)}
+@media(max-width:680px){.lb-prev,.lb-next{top:auto;bottom:14px}.lb-prev{left:calc(50% - 64px)}.lb-next{right:calc(50% - 64px)}.lightbox{padding-bottom:84px}.lightbox img{max-height:58vh}}
+
+/* 5. 页首插画：像舞台灯亮了一下，画面慢慢推近再退回（约 3 秒，只动一次）
+   电脑：鼠标放上去就动；手机：滑到这张图时动一次。不加任何图片或视频。 */
+.page-art{position:relative;overflow:hidden;border:1px solid #514234}
+.art-motion{position:relative;overflow:hidden}
+.page-art img,.art-motion img{border:0;transform-origin:50% 60%}
+.page-art::after,.art-motion::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse 60% 55% at 50% 42%,rgba(255,214,140,.38),rgba(255,214,140,0) 70%);mix-blend-mode:screen}
+.page-art.stage-on img,.art-motion.stage-on img{animation:stage-breath 3.2s ease-in-out}
+.page-art.stage-on::after,.art-motion.stage-on::after{animation:stage-light 3.2s ease-in-out}
+@keyframes stage-breath{0%{transform:scale(1);filter:none}45%{transform:scale(1.035);filter:brightness(1.06) saturate(1.08)}100%{transform:scale(1);filter:none}}
+@keyframes stage-light{0%{opacity:0}18%{opacity:.85}30%{opacity:.45}42%{opacity:.8}100%{opacity:0}}
+
+/* 长辈或系统设置了“减少动态效果”：不淡入、不放大、不过渡 */
+@media (prefers-reduced-motion: reduce){
+  .page-art.stage-on img,.page-art.stage-on::after,.art-motion.stage-on img,.art-motion.stage-on::after{animation:none}
+  .js-motion .reveal{opacity:1;transform:none;transition:none}
+  .album img,.lightbox,.lightbox img,.event-shelf .sample-grid a{transition:none}
+  .album button:hover img{transform:none}
+}
+@media print{.js-motion .reveal{opacity:1;transform:none}.lightbox{display:none}}
