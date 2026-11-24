@@ -51,8 +51,54 @@
       playing = true;
       art.classList.add('stage-on');
     }
+    /* 首页歌剧院：三组帆顶依次轻轻抬起。用 SVG 叠一层同一张图，按帆顶形状裁剪，
+       viewBox 与 object-fit:cover 的裁切方式一致，所以电脑和手机上都对得准。 */
+    var hero = art.querySelector('img[data-sails]');
+    if (hero) {
+      var NS = 'http://www.w3.org/2000/svg';
+      var groups = [
+        { pts: '503,345 563,342 623,385 668,452 488,456', ox: 575, oy: 456, d: 0 },
+        { pts: '603,304 653,320 706,381 747,471 668,452 623,385', ox: 675, oy: 471, d: 0.35 },
+        { pts: '664,250 700,262 760,300 810,355 822,392 780,420 751,471 722,420 698,330 676,290', ox: 745, oy: 471, d: 0.7 }
+      ];
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'sails');
+      svg.setAttribute('viewBox', '0 0 1150 767');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('focusable', 'false');
+      var defs = document.createElementNS(NS, 'defs');
+      svg.appendChild(defs);
+      groups.forEach(function (g, i) {
+        var cp = document.createElementNS(NS, 'clipPath');
+        cp.setAttribute('id', 'sail-clip-' + i);
+        var poly = document.createElementNS(NS, 'polygon');
+        poly.setAttribute('points', g.pts);
+        cp.appendChild(poly);
+        defs.appendChild(cp);
+        var wrap = document.createElementNS(NS, 'g');
+        wrap.setAttribute('clip-path', 'url(#sail-clip-' + i + ')');
+        var mover = document.createElementNS(NS, 'g');
+        mover.setAttribute('class', 'sail');
+        mover.style.transformOrigin = g.ox + 'px ' + g.oy + 'px';
+        mover.style.animationDelay = g.d + 's';
+        var im = document.createElementNS(NS, 'image');
+        im.setAttribute('href', hero.currentSrc || hero.src);
+        im.setAttribute('width', '1150');
+        im.setAttribute('height', '767');
+        mover.appendChild(im);
+        wrap.appendChild(mover);
+        svg.appendChild(wrap);
+      });
+      art.appendChild(svg);
+      var fit = function () { svg.style.width = hero.offsetWidth + 'px'; svg.style.height = hero.offsetHeight + 'px'; };
+      fit();
+      window.addEventListener('resize', fit);
+      hero.addEventListener('load', fit);
+    }
     art.addEventListener('animationend', function (e) {
-      if (e.animationName !== 'stage-breath') return;
+      if (e.animationName !== 'stage-breath' && e.animationName !== 'sail-lift') return;
+      if (e.animationName === 'sail-lift') return;
       art.classList.remove('stage-on');
       playing = false;
     });

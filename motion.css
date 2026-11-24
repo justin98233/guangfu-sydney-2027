@@ -51,12 +51,17 @@
   background:radial-gradient(ellipse 60% 55% at 50% 42%,rgba(255,214,140,.38),rgba(255,214,140,0) 70%);mix-blend-mode:screen}
 .page-art.stage-on img,.art-motion.stage-on img{animation:stage-breath 3.2s ease-in-out}
 .page-art.stage-on::after,.art-motion.stage-on::after{animation:stage-light 3.2s ease-in-out}
+/* 首页歌剧院三组帆顶 */
+.art-motion .sails{position:absolute;left:0;top:0;pointer-events:none;display:block}
+.art-motion .sail{transform-box:view-box}
+.art-motion.stage-on .sail{animation:sail-lift 2.5s ease-in-out both}
+@keyframes sail-lift{0%{transform:translateY(0) scale(1);filter:none}40%{transform:translateY(-5px) scale(1.012);filter:brightness(1.07)}100%{transform:translateY(0) scale(1);filter:none}}
 @keyframes stage-breath{0%{transform:scale(1);filter:none}45%{transform:scale(1.035);filter:brightness(1.06) saturate(1.08)}100%{transform:scale(1);filter:none}}
 @keyframes stage-light{0%{opacity:0}18%{opacity:.85}30%{opacity:.45}42%{opacity:.8}100%{opacity:0}}
 
 /* 长辈或系统设置了“减少动态效果”：不淡入、不放大、不过渡 */
 @media (prefers-reduced-motion: reduce){
-  .page-art.stage-on img,.page-art.stage-on::after,.art-motion.stage-on img,.art-motion.stage-on::after{animation:none}
+  .page-art.stage-on img,.page-art.stage-on::after,.art-motion.stage-on img,.art-motion.stage-on::after,.art-motion.stage-on .sail{animation:none}
   .js-motion .reveal{opacity:1;transform:none;transition:none}
   .album img,.lightbox,.lightbox img,.event-shelf .sample-grid a{transition:none}
   .album button:hover img{transform:none}
