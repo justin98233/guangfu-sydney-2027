@@ -166,3 +166,11 @@ html.large-reading .front,html.large-reading .townhall{--reading-size:22px}
 .front-feature{padding:16px 0 20px}.front-cover img{aspect-ratio:2.05}.front .section-head a{font-size:.9em}
 .front-info section+section{margin-top:18px;border-top:1px solid var(--rule);padding-top:18px}
 .townhall .album{grid-template-columns:minmax(0,1fr)}}
+
+.timeline li { padding:0; }
+.timeline a { display:block; min-height:44px; padding:12px 8px 8px 0; color:inherit; text-decoration:none; }
+.timeline a strong { text-decoration:underline; text-underline-offset:.2em; text-decoration-thickness:1px; }
+.timeline a strong span { display:inline-block; text-decoration:none; }
+.timeline a:hover,.timeline a:focus-visible { color:var(--red); }
+.edition-grid article[id] { scroll-margin-top:1rem; }
+.edition-grid article:target,.edition-grid article:focus { outline:2px solid var(--red); outline-offset:2px; }
