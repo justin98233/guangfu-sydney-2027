@@ -8,6 +8,19 @@
   function init() {
     if (!document.body) return;
   var root = document.documentElement;
+  var fontButton = document.querySelector('.font-control');
+  if (fontButton) {
+    function setReadingSize(large) {
+      root.classList.toggle('large-reading', large);
+      fontButton.setAttribute('aria-pressed', String(large));
+    }
+    try { setReadingSize(localStorage.getItem('guangfu-large-type') === '1'); } catch (_) {}
+    fontButton.onclick = function () {
+      var large = fontButton.getAttribute('aria-pressed') !== 'true';
+      setReadingSize(large);
+      try { localStorage.setItem('guangfu-large-type', large ? '1' : '0'); } catch (_) {}
+    };
+  }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- 1. 淡入 ---------- */

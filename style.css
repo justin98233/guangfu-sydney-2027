@@ -125,3 +125,44 @@ body{line-height:1.75}body,nav{background-color:#f8f3e7}.wrap{max-width:1240px;p
 .association-purpose blockquote { margin:0; color:#823827; font:700 clamp(23px,2.4vw,33px)/1.45 var(--serif); }
 .association-purpose blockquote span { display:inline-block; }
 .association-purpose figcaption { margin-top:.45rem; color:var(--ink-2); font-size:.9rem; }
+
+/* Sydney Town Hall photo album and mobile home, November 2026. */
+.front,.townhall{--accent:#972e26;--muted:#595246;--rule:#c9bda5;--reading-size:18px;font-size:var(--reading-size);line-height:1.65}
+html.large-reading .front,html.large-reading .townhall{--reading-size:22px}
+.front-hero,.front-cover,.front-info{display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:4%}
+.front-hero{padding:34px 0}.front h1{font-size:clamp(2em,4.2vw,3.6em);line-height:1.2}
+.front h1 strong,.front h1 span{display:block}.front h1 span{font-size:.72em;color:var(--accent)}
+.front .eyebrow,.front .when,.townhall .eyebrow{color:var(--accent);font-weight:650;letter-spacing:.06em;font-size:.88em;margin:0 0 9px}
+.front .desc{color:var(--muted);max-width:27em;margin:.65em 0 .9em}
+.front .actions{display:flex;flex-wrap:wrap;gap:7px}
+.front-btn,.townhall .back,.front .section-head a,.font-control{min-height:46px;display:inline-flex;align-items:center;justify-content:center}
+.front-btn{font-size:.91em;font-weight:650;text-decoration:none;padding:.45em .8em;border:1px solid var(--rule);border-radius:3px}
+.front-btn.primary{background:var(--accent);border-color:var(--accent);color:white}
+.front .hero-art{margin:0;padding:5px;border:1px solid #907a51;background:#f3e8cd}
+.front .hero-art img{width:100%;height:auto;aspect-ratio:1.85;object-fit:cover;object-position:50% 55%}
+.front-feature{border-block:1px solid var(--rule);padding:22px 0 30px}
+.front .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.front .section-head a,.front .more,.townhall .back{color:var(--accent);font-weight:650}
+.front-cover{background:#f1e8d8;text-decoration:none}.front-cover img{width:100%;height:auto;aspect-ratio:1.95;object-fit:cover}
+.front-cover .caption{padding:12px 16px}.front-cover .caption p{margin:.4em 0}
+.front-info{align-items:start;padding:28px 0}.front-info section{padding:0}.front-info h2,.front .section-head h2{font-size:1.55em}
+.front-info dl div{display:flex;gap:1em;margin:.2em 0}.front-info dt{font-weight:bold;min-width:4em}.front-info dd{margin:0}
+.front-info summary{padding:9px 0;cursor:pointer;min-height:46px}.front-info .qr{width:min(200px,90%);height:auto}
+.townhall{padding-block:16px 34px}.townhall h1{font-size:clamp(1.85em,4vw,3.1em)}.townhall .back{margin-bottom:12px}
+.townhall .album{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.townhall .album img{height:auto;aspect-ratio:auto}.townhall .album .cap strong{font-size:1.3em}
+.townhall .album .cap,.townhall .album .cap small{font-size:1em}.townhall .album li{opacity:1;transform:none}
+.front-nav .font-control{min-width:44px;border:0;background:transparent;font:inherit;cursor:pointer}.font-control[aria-pressed=true]{text-decoration:underline;color:var(--red)}
+.front-nav .compact-menu{display:none}
+@media(max-width:820px){
+.front-nav .wrap{flex-wrap:wrap;gap:5px;min-height:62px;padding-block:3px}.front-nav .brand{font-size:18px;gap:5px}.front-nav .brand b{font-size:10px}
+.front-nav .menu{display:none}.front-nav .compact-menu{display:block;position:relative;margin-left:auto}.compact-menu summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-size:15px}.compact-menu summary::after{content:"⌄";margin-left:2px}
+.compact-menu .menu-links{position:absolute;z-index:20;top:100%;right:0;width:150px;box-shadow:0 3px 10px #382e2126;background:#faf6ec;border:1px solid #c9bda5;padding:5px 12px}.compact-menu a{display:block;padding:8px 0}
+.front-nav .langs{order:initial;margin-left:0;gap:2px}.front-nav .langs a{min-width:26px}.front-nav .font-control{min-width:38px}
+.front-hero,.front-cover,.front-info{display:block}.front-hero{padding:20px 0 22px}.front h1{font-size:max(1.75em,6.3vw)}
+.front h1 strong:nth-child(2),.front h1 span{display:inline-block}.front h1 span{margin-left:.5em;font-size:.68em}
+.front .hero-art{margin-top:18px}.front .hero-art img{aspect-ratio:2.2;object-position:50% 56%}
+.front .actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.front-btn{padding:7px 2px;text-align:center}
+.front-feature{padding:16px 0 20px}.front-cover img{aspect-ratio:2.05}.front .section-head a{font-size:.9em}
+.front-info section+section{margin-top:18px;border-top:1px solid var(--rule);padding-top:18px}
+.townhall .album{grid-template-columns:minmax(0,1fr)}}
