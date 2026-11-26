@@ -104,10 +104,12 @@
         svg.appendChild(wrap);
       });
       art.appendChild(svg);
-      var fit = function () { svg.style.width = hero.offsetWidth + 'px'; svg.style.height = hero.offsetHeight + 'px'; };
-      fit();
-      window.addEventListener('resize', fit);
-      hero.addEventListener('load', fit);
+      if (!art.closest('.hero-art')) {
+        var fit = function () { svg.style.width = hero.offsetWidth + 'px'; svg.style.height = hero.offsetHeight + 'px'; };
+        fit();
+        window.addEventListener('resize', fit);
+        hero.addEventListener('load', fit);
+      }
     }
     art.addEventListener('animationend', function (e) {
       if (e.animationName !== 'stage-breath' && e.animationName !== 'sail-lift') return;
